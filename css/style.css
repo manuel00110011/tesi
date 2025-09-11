@@ -1,0 +1,234 @@
+
+     body { 
+      background-image:  url('../fotobanca.jpg');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      
+    }
+    .container {
+      margin-top: 100px;
+    }
+
+    .login-button {
+      background-color: rgb(0, 17, 255);
+      color: white; 
+      border: none;
+      border-radius: 30px;
+      padding: 15px 40px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .login-button:hover {
+      background-color: rgb(90, 106, 255);
+    }
+
+    .form-container {
+      margin-top: 50px;
+      display: none;
+    }
+
+    .form-container input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+    }
+
+    .submit-button {
+       background-color: rgb(6, 31, 255);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block; 
+      margin: 20px auto;
+    }
+
+    .submit-button:hover {
+       background-color:  rgb(90, 106, 255);
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    img {
+      width: 400px;
+      height: auto;
+    }
+
+
+/* carta */
+.card-visual {
+  border-radius: 20px;
+  background: linear-gradient(135deg, #111, #222);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  padding: 20px 30px;
+  width: 350px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.card-visual {
+  width: 350px;
+  height: 200px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #000);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px 25px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* FRONTE */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  color: #ffffffcc;
+}
+
+.card-number {
+  font-family: 'Courier New', monospace;
+  font-size: 1.3em;
+  letter-spacing: 3px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.card-expiry {
+  font-size: 0.9em;
+  color: #cccccc;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: #dddddd;
+  margin-top: 40px;
+}
+
+.card-back {
+  border-radius: 20px;
+  background: linear-gradient(135deg, #000000, #222222, #111111);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.9);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  padding: 20px 30px;
+  user-select: none;
+  position: relative;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Banda magnetica */
+.magnetic-strip {
+  background: #3a3a3a;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Riga con firma e CVV */
+.signature-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  height: 40px;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
+.signature-placeholder {
+  flex: 1;
+  background-color: #eaeaea;
+  height: 100%;
+  margin-right: 10px;
+  border-radius: 2px;
+  font-size: 0.8em;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+}
+
+.cvv-code {
+  font-size: 1em;
+  letter-spacing: 2px;
+  background-color: #fff;
+  color: #000;
+  padding: 5px 8px;
+  border-radius: 3px;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Numero carta e scadenza in basso */
+.card-number-back,
+.expiry-back {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85em;
+  letter-spacing: 2px;
+  opacity: 0.85;
+  margin-top: auto;
+}
+
+.card-number-back {
+  margin-top: 10px;
+}
+
+.expiry-back {
+  margin-bottom: 5px;
+
+}
+.alert-sm {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 15px;
+}
+
+#dettagliProfilo p {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+#dettagliProfilo strong {
+    color: #2c3e50;
+}
+
