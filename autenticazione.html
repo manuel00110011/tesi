@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Autenticazione</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+    <script>
+    function toggleForm() {
+      const form = document.getElementById("loginForm");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+
+    function effettuaLogin() {
+      var username = document.getElementById("numeroBancario").value;
+      var password = document.getElementById("codiceSegreto").value;
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "api/login.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              if (response.success) {
+                  alert("Accesso effettuato con successo!");
+                  window.location.href = "home.php";
+              } else {
+                  alert("Credenziali non valide. Riprova.");
+              }
+          }
+      };
+
+      var data = "username=" + username + "&password=" + password;
+      xhr.send(data);
+  }
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand">La Mia Banca</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav"></div>
+    </div>
+  </nav>
+  <div class="container">
+    <button class="login-button" onclick="toggleForm()">ACCEDI</button>
+      <div class="form-container" id="loginForm">
+        <input type="text" id="numeroBancario" placeholder="Numero Bancario">
+        <input type="password" id="codiceSegreto" placeholder="Codice Segreto">
+        <button class="submit-button" onclick="effettuaLogin()">Conferma</button>
+      </div>
+  </div>
+</body>
+</html>

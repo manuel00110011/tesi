@@ -1,0 +1,208 @@
+openapi: 3.0.0
+info:
+  title: MyBank API
+  description: Sistema bancario digitale - API per operazioni bancarie
+  version: 1.0.0
+  contact:
+    name: Manuel Conti
+
+servers:
+  - url: http://localhost/Tesi/api
+    description: Server locale XAMPP
+
+paths:
+  /login.php:
+    post:
+      summary: Autenticazione utente
+      description: Login con numero conto bancario e password
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  description: Numero del conto bancario
+                  example: "12345678"
+                password:
+                  type: string
+                  description: Password dell'utente
+                  example: "mypassword"
+      responses:
+        '200':
+          description: Risposta di login
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      id_utente:
+                        type: integer
+                        example: 1
+                      nome_utente:
+                        type: string
+                        example: "Mario"
+                  - type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      error:
+                        type: string
+                        example: "Credenziali errate"
+        '405':
+          description: Metodo non supportato
+
+  /logout.php:
+    get:
+      summary: Logout utente
+      description: Termina la sessione utente e reindirizza alla pagina di login
+      responses:
+        '302':
+          description: Redirect alla pagina di autenticazione
+
+  /get_saldo.php:
+    get:
+      summary: Ottiene saldo conto
+      description: Calcola e restituisce il saldo di un conto specifico
+      parameters:
+        - name: id_conto
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: ID del conto di cui ottenere il saldo
+          example: 1
+      responses:
+        '200':
+          description: Saldo recuperato
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      saldo:
+                        type: string
+                        description: Saldo formattato con 2 decimali
+                        example: "1250.50"
+                  - type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: "ID conto non fornito"
+
+  /dettagli_movimento.php:
+    get:
+      summary: Dettagli movimento
+      description: Restituisce i dettagli completi di un movimento (HTML)
+      parameters:
+        - name: id_movimento
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: ID del movimento
+          example: 123
+        - name: fonte
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [conto, carta]
+            default: conto
+          description: Fonte del movimento (conto o carta)
+      responses:
+        '200':
+          description: Dettagli movimento in formato HTML
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML formattato con i dettagli del movimento
+        '400':
+          description: ID movimento non valido
+
+  /dati_grafico_carta.php:
+    get:
+      summary: Dati per grafici carte
+      description: Restituisce dati per grafici Chart.js delle spese carte
+      security:
+        - SessionAuth: []
+      parameters:
+        - name: numero_carta
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Numero della carta
+          example: "1234567890123456"
+        - name: data_inizio
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Data inizio periodo (YYYY-MM-DD)
+          example: "2024-01-01"
+        - name: data_fine
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Data fine periodo (YYYY-MM-DD)
+          example: "2024-12-31"
+      responses:
+        '200':
+          description: Dati per grafico
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: string
+                      format: date
+                      description: Data del movimento
+                    importo:
+                      type: number
+                      format: float
+                      description: Importo del movimento
+                example:
+                  - data: "2024-01-15"
+                    importo: 25.50
+                  - data: "2024-01-20"
+                    importo: 130.00
+        '401':
+          description: Non autenticato
+        '400':
+          description: Parametri mancanti o carta non autorizzata
+
+components:
+  securitySchemes:
+    SessionAuth:
+      type: apiKey
+      in: cookie
+      name: PHPSESSID
+      description: Autenticazione tramite sessione PHP
+
+security:
+  - SessionAuth: []
