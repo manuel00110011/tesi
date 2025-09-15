@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Set 11, 2025 alle 14:08
+-- Creato il: Set 15, 2025 alle 12:58
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -558,6 +558,7 @@ ALTER TABLE `investimenti`
 -- Limiti per la tabella `movimenti`
 --
 ALTER TABLE `movimenti`
+  ADD CONSTRAINT `fk_movimenti_tipologia` FOREIGN KEY (`tipo_movimento`) REFERENCES `tipologia_movimento` (`id`),
   ADD CONSTRAINT `movimenti_ibfk_1` FOREIGN KEY (`id_conto`) REFERENCES `conto` (`id`) ON DELETE CASCADE;
 
 --
@@ -570,3 +571,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
